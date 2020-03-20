@@ -21,6 +21,7 @@ the dependencies missing from nix.
 #+BEGIN_SRC bash
 curl -L --proto '=https' --tlsv1.2 https://nixos.org/nix/install | sh
 nix-channel --add https://nixos.org/channels/nixos-20.03
+nix-channel --update
 git clone https://github.com/LuisChDev/ProtoTMS
 cd ProtoTMS
 nix-shell
