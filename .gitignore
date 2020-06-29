@@ -145,3 +145,8 @@ static
 # custom for this project
 secrets.yaml
 .nix-gc-roots
+.direnv
+.envrc
+assets/*
+
+**/.directory

@@ -65,3 +65,7 @@ with your key, like this:
 API_key: "yourapikeygoeshere"
   
 #+END_SRC
+** por hacer / things to do
+   - escribir pruebas para la mayoría de funciones
+
+   - write tests for most functions

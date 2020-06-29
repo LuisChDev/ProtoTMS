@@ -1,5 +1,0 @@
-googlemaps
-
-# ortools form nix appears to be broken
-six
-protobuf

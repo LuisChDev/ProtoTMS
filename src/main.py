@@ -2,24 +2,27 @@
 This module contains the main sequence of operations for the calculation
 of routes.
 """
-from typing import Dict
+from typing import Dict, Union, List
 
-from ortools.constraint_solver import pywrapcp, routing_enums_pb2
-from pony import orm
+from ortools.constraint_solver import (pywrapcp,           # type: ignore
+                                       routing_enums_pb2)  # type: ignore
 
-from .matrix import matrix
+from src.matrix import matrix
 
 
-def create_data_model() -> Dict:
+def create_data_model() -> Dict[str, Union[int, List[List[float]]]]:
     """Stores the data for the problem."""
-    data = {}
-    data["distance_matrix"] = matrix
-    data["num_vehicles"] = 4
-    data["depot"] = 0
-    return data
+    return {
+        "distance_matrix": matrix,
+        "num_vehicles": 4,
+        "depot": 0
+    }
 
 
 def print_solution(data: Dict, manager, routing, solution):
+    """
+    Prints the calculated routing schedule.
+    """
     max_route_distance = 0
     for vehicle_id in range(data['num_vehicles']):
         index = routing.Start(vehicle_id)
@@ -40,6 +43,9 @@ def print_solution(data: Dict, manager, routing, solution):
 
 
 def main():
+    """
+    creates the data model, the routing model and runs the optimization.
+    """
     data = create_data_model()
 
     # Create the routing index manager.

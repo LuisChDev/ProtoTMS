@@ -1,9 +1,19 @@
+numpy
+beautifulsoup4
+requests
 googlemaps
 ortools
 pony
+pyyaml
 
 # for development only
+data-science-types
 python-language-server
 flake8
+mypy
 pyls-black
 pyls-mypy
+future # for pyls-mypy
+importmagic
+epc
+rope

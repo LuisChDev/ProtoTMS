@@ -1,5 +1,9 @@
+"""
+this module contains a single fat-ass matrix.
+"""
+
 from typing import List, Tuple
-matrix: List[List[int]] = [
+matrix: List[List[float]] = [
     [
         0,
         548,
