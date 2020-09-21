@@ -1,0 +1,275 @@
+\documentclass[12pt]{extarticle}
+\usepackage[utf8]{inputenc}
+% \usepackage{cite}
+\usepackage{biblatex}
+\addbibresource{Biblio.bib}
+\addbibresource{Pymes.bib}
+
+\title{Evaluación de metaheurísticas e implementación de un producto de software
+  para la solución de problemas de enrutamiento en las pequeñas y medianas
+  empresas}
+\author{Luis E. Chavarriaga Cifuentes}
+\date{Agosto 2020}
+
+\begin{document}
+
+\maketitle
+
+\section{Disciplina científica}
+Ingeniería de Sistemas y Computación.
+
+\section{Cobertura de la investigación}
+El proyecto de investigación aquí propuesto se extiende a la evaluación de
+metaheurísticas, técnicas modernas de optimización por computador para la
+solución de varios tipos de problemas. Específicamente, se propone explorar su
+utilidad en la solución de una familia de problemas conocida como Problema de
+Enrutamiento de Vehículos (\textit{Vehicle Routing Problem}, o VRP), usado para
+modelar problemas de transporte.
+
+\begin{itemize}
+\item El proyecto busca evaluar estrategias novedosas de optimización basadas en
+  metaheurísticas, junto con una implementación tentativa. En ese sentido, no
+  apunta a probar soluciones comerciales ya existentes para el VRP, como las
+  presentes en WinQSB.
+\item El proyecto se centrará en la evaluación de estas técnicas de optimización
+  en la solución de la familia de problemas VRP. Dicho esto, no se prevee la
+  realización de estudios sobre familias de problemas de optimización
+  diferentes, como la de Job Stop Scheduling (JSS), que también tienen
+  aplicaciones en el campo empresarial.
+\item Si bien existen servicios de mapas alternativos a Google Maps (Apple Maps,
+  Bing Maps y otros), el proyecto se enfocará en emplear las tecnologías de
+  Google para hacer el procesamiento necesario de la información.
+\end{itemize}
+
+\section{Campo de la investigación}
+Inteligencia Artificial.
+
+\section{Antecedentes}
+\subsection{Marco Teórico}
+Supóngase que se tiene una empresa de domicilios con 5 repartidores. Cada uno
+de ellos es capaz de llevar 5 pedidos. Se tienen unos 30 pedidos de diferentes
+partes de la ciudad. ¿Qué pedidos deberán asignarse a qué repartidores, de modo
+que el total de kilómetros recorridos por todos (o el tiempo total de recorrido)
+sea el mínimo posible?
+
+Este problema es conocido como Vehicle Routing Problem (VRP, por sus siglas en
+inglés). Con el objeto de modelar condiciones más reales, se han ideado muchas
+posibles variaciones del mismo, que tienen en cuenta el tráfico, la autonomía de
+los repartidores (en caso, por ejemplo, de usar camiones para el reparto),
+ventanas de tiempo, prioridad de los envíos, diferentes capacidades de carga, y
+otras \cite{caceres-cruz_rich_2015}.
+
+Matemáticamente, este problema implica encontrar una serie de caminos (tantos
+como repartidores haya) que pasen por todos los destinos. Dado que el número de
+posibles caminos entre ubicaciones crece factorialmente, nos encontramos en
+frente de un problema de optimización factorial. Esta familia de problemas son
+especialmente difíciles de resolver, debido al alto costo computacional que
+implica calcular todas los recorridos posibles y su costo \cite{toth_paolo_vehicle_2002}.
+
+Hoy día, existe una serie de técnicas computacionales, llamadas
+\textit{metaheurísticas}, que, en lugar de calcular la solución exacta, buscan
+hallar una aproximación lo suficientemente cercana a la real para ser útil.
+Dichos métodos siguen reglas simples y generales, que no son específicas al
+problema, sino que son inspiradas, usualmente, por procesos naturales
+(son \textit{heurísticas}). Empleando metaheurísticas, es posible obtener
+soluciones aproximadas al enrutamiento de envíos y transporte de carga y
+personas en un tiempo razonable, haciéndolas viables para un negocio.
+
+Para ello, es necesario un análisis preliminar del problema, de la naturaleza y
+estructura de los datos y qué algoritmo metaheurístico funciona mejor en cada
+uno de los casos. Una vez determinado, es posible elaborar un prototipo básico
+para determinar las características que deberá tener el software para ser
+utilizable en el mundo real.
+
+\subsection{Estado del Arte}
+Hay una extensa literatura acerca del VRP y sus aplicaciones en la industria
+\cite{pillac_review_2013} \cite{gomez_metaheuristicas_2014}.
+\cite{eksioglu_vehicle_2009} presenta una primera revisión de las publicaciones
+con las palabras ``vehicle routing'' en el título, sujeto o abstract halladas en
+las bases de datos digitales, realizadas entre 1959 y 2008. Asimismo, se propone
+una primera clasificación de las variantes del mismo. Se observa incluso que la
+frecuencia en que se publican artículos crece a un ritmo exponencial [pág.
+1475]. Se halla que entre las fechas estipuladas se han publicado un total de
+1021 artículos directamente aplicables al tema. \cite{braekers_vehicle_2016}
+Realiza una revisión más reciente, de la literatura publicada entre 2009 y 2015,
+empleando una taxonomía basada en \cite{eksioglu_vehicle_2009}, con ciertas
+modificaciones. Se halla que, cumpliendo los criterios de selección
+establecidos, unos 277 artículos han sido publicados entres las fechas. Ambas
+revisiones del estado del arte hacen hincapié en la existencia de un cuerpo más
+extenso aún de publicaciones centradas en problemas relacionados, como el de
+empacado de vehículos, y su integración con el VRP. (Véanse
+\cite{prodhon_survey_2014} \cite{pollaris_vehicle_2015} y
+\cite{golden_inventory_2008} para revisiones de estos problemas relacionados, y
+\cite{pillac_review_2013}, \cite{groer_consistent_2009} y
+\cite{caceres-cruz_rich_2015} para revisiones de variantes específicas
+publicadas recientemente.) 
+
+Similarmente, debido a la proliferación de métodos de solución al problema, es
+posible hallar una literatura dedicada a la comparación de dichos métodos.
+\cite{breedam_comparing_2001} Compara la heurística de descenso, la búsqueda
+tabú (BT) y el recocido simulado (RS) como metodologías para la solución del
+VRP. El artículo concluye que si bien el descenso heurístico produce un
+resultado más rápidamente, tanto el BT como el RS eventualmente logran un mejor
+resultado, y que la diferencia entre los resultados de ambos rara vez supera el
+4\%. Mientras tanto, escoger una buena heurística inicial influye
+considerablemente en el tiempo que se tarda en llegar al resultado final. El
+trabajo no incluye comparación a otros tipos de metaheurísticas.
+
+\cite{asih_comparison_2017}, en un trabajo más reciente, compara un número más
+extenso de metaheurísticas (\textit{Ant Colony Optimization} (ACO),
+\textit{Particle Swarm Optimization} (PSO), Algoritmos genéticos (GA) y RS
+(SA)), esta vez contra dos problemas reales. El primer caso compara el desempeño
+de las metaheurísticas en generar las rutas para una empresa con 58 ubicaciones,
+así como un escenario colaborativo en el que dos empresas comparten camiones y
+puntos de reparto. los resultados muestran que el RS tiende a tener un buen
+desempeño, sobretodo respecto al tiempo de computación, pero que esta ventaja
+puede desvanecerse dado un número de locales más grande. Se hace notar que el
+resultado del estudio tiene a diferir de los obtenidos en pruebas con datos
+aleatorios: ``In hypothetical data, GA is outperform [\textit{sic}] compared to
+other approaches, but in this empirical study, GA performs less than ACO and
+even SA''. La sección de conclusiones nota que la evaluación de metaheurísticas
+en estudios empíricos está aún abierta para exploración futura.
+
+Finalmente, se han hecho también comparaciones sobre las metaheurísticas en
+general. \cite{hussain_metaheuristic_2019} representa una investigación reciente
+que observa, en particular, que el \textit{Particle Swarm Optimization} ha
+recibido una amplia atención de la literatura en un amplio número de campos, y
+que las metaheurísticas en su totalidad han recibido atención creciente como
+método de solución a problemas muy diversos.
+
+Existen hoy día soluciones de software para el problema, con aplicaciones
+comerciales, como en \cite{erdogan_open_2017}, que aplican metaheurísticas al
+problema. Sin embargo, no se observa un análisis detallado de la aplicabilidad
+de las distintas metaheurísticas para resolver el problema.
+
+Análisis de este tipo ya se han realizado, en torno a problemas de corte
+comercial \cite{gavalas_survey_2014}. Se desea realizar un análisis similar
+sobre los algoritmos ya implementados en varias herramientas, en particular, la
+herramienta OR-Tools de Google \cite{noauthor_or-tools_nodate}, que permita
+expresar la posibilidad de implementar una solución de este tipo de forma
+accesible a pequeñas y medianas empresas en la región.
+
+\section{Breve descripción del problema}
+
+%%% esta sección pertenece al marco teórico (antecedentes)
+%%% fin de la sección
+
+La situación de las PYMEs en Colombia no es la mejor. En \cite[págs.
+109-111]{r_situacion_2010}, se realiza un estudio acerca de la viabilidad del
+sector en la economía colombiana, con resultados mixtos: de los 16 factores del
+índice global de competitividad, Colombia había descendido de posición en 14 de
+los mismos en el período de 2006 a 2008. Si bien las PYMEs constituían en 50\%
+de las empresas exportadoras en el país (ya de por sí un número bajo,
+considerando que constituyen el 96\% del total de empresas), sólo el 18,6\% de
+las mismas logra vender con éxito en el exterior. \cite[pág.
+110]{r_situacion_2010}, indica los doce elementos que más inciden en las
+dificultades para las PYMEs en lograr mayor competitividad, de las cuales
+resaltan los siguientes en el contexto de este documento: 
+\begin{itemize}
+\item Bajos niveles de innovación y absorción de tecnologías.
+\item Deficiencias en la infraestructura de transporte y energía.
+\item Rezago en penetración de tecnologías de información y conectividad.
+\end{itemize}
+La dificultad en la adquisición de nuevas tecnologías puede corregirse mediante
+la puesta en disposición de productos funcionales a un precio asequible a las
+PYMEs, que usualmente no pueden darse el lujo de contratar las soluciones
+comerciales existentes, usualmente dirigidas a empresas más grandes. Las
+deficiencias en infraestructura de transporte son difíciles de corregir, pero
+apuntan a una necesidad considerable de optimizar esta parte del proceso allí
+donde es posible. Por último, la introducción de un nuevo software de planeación
+de transporte puede ayudar a estas empresas a formalizar los procesos por los
+que colectan y procesan la información generada en sus actividades, con los
+beneficios que esto implica.\cite[pág. 93]{premkumar_meta-analysis_2003}
+
+
+En el período 2003-2006, se crearon 43716 nuevas empresas, pero se liquidaron
+8593 empresas existentes, representando 3.3 billones de pesos en capital
+acumulado, casi el 20\% respecto de las empresas formadas
+\cite{espinosa_fracaso_2015}\cite[págs. 14-21]{bogota_dinamica_2006}. De acuerdo
+a \cite[págs. 13-14]{vega_pymes_2011}\cite[págs. 23-24]{bogota_dinamica_2006}, tres de las principales
+causas de cierre de las entidades son:
+\begin{itemize}
+\item Dificultades de las empresas para adaptarse a los cambios tecnológicos.
+\item Baja utilización en la capacidad instalada o un alto índice de
+  inventarios.
+\item Reducción del capital y aumento significativo de los pasivos.
+\end{itemize}
+El primer punto apunta a la dificultad que pueden tener muchas empresas en
+adoptar nuevas tecnologías, aspecto crítico para mantenerse competitivas, y que
+puede ser causado por los altos precios propios de soluciones comerciales. Esto
+toca en el tercer punto, ya que la introducción de pasivos a las finanzas de una
+PYME le puede resultar fatal. Estos costos adicionales tienen al menos parte de
+su origen en los costos de transporte de mercancía: En un estudio realizado por
+\cite[pág. 6]{gaytan_logistica_2017}, las entidades comerciales encuestadas
+daban una cifra de alrededor del 20\% en gastos de logística, que se contrastan
+con el 8\% observado en países como Estados Unidos. Por otra parte, se ha
+observado que la aplicación de métodos de optimización permite obtener ahorros
+de entre 5 y 20\% en los costos totales de transporte
+\cite{toth_paolo_vehicle_2002}.
+
+
+\section{Justificación}
+La economía colombiana, al igual que en el resto del mundo, ha visto dos
+importantes transformaciones: El crecimiento del sector secundario, encabezado
+por la industria textil y pesada \cite{naranjo_industria_nodate}, y más tarde,
+el del sector terciario, con servicios como la banca y el comercio exterior
+tomando cada vez más preponderancia \cite{urrutia_perspectivas_1990} . En el
+contexto actual, la expansión vertiginosa de este último ha hecho que extertos
+en el tema consideren una división entre los aspectos más tradicionales del
+mismo, como las ventas y el transporte, y los servicios basados en la
+información, el conocimiento y la tecnología, muchas veces llamado sector
+cuaternario y cuya existencia queda respaldada por el impulso a la ``economía
+naranja'' que se le ha dado a nivel nacional
+\cite{noauthor_econominaranja_nodate}. Dicha economía de la información permite
+un incremento en la productividad de todos los anteriores sectores, al optimizar
+procesos, reducir costos, e incrementar la calidad de los resultados.
+
+Un servicio transversal a los sectores primario, secundario y terciario es el
+del transporte, crítico para el movimiento de materias primas, productos
+manufacturados y personas, y el funcionamiento correcto de estas industrias
+\cite{r_situacion_2010}. Históricamente, la esquematización del transporte y
+la optimización de rutas ha sido un proceso de alta complejidad, del cual
+depende la rentabilidad de muchos negocios en Colombia. Si bien existen
+herramientas con este propósito, el costo de las mismas es prohibitivo para
+muchas pequeñas y medianas empresas (PYMEs) en el país.
+
+En este sentido, el desarrollo reciente de técnicas de optimización basadas en
+metaheurísticas ofrece una oportunidad para economizar este proceso y ofrecerle
+a este segmento de la economía los medios para aumentar sus márgenes y mejorar
+sus proyecciones financieras \cite{gomez_metaheuristicas_2014}. Asimismo, la
+creación local de un producto de software tiene consecuencias positivas para la
+expansión de la economía naranja y la consolidación de la industria del software
+en Colombia y sus servicios.
+
+Este proyecto propone la aplicación de metaheurísticas en la construcción de una
+aplicación de software para la optimización de recorridos de transporte.
+
+\section{Objetivos}
+
+\subsection{Objetivo general}
+Implementar y evaluar un producto de software que permita, a través de
+metaheurísticas, optimizar rutas de transporte para PYMEs.
+
+\subsection{Objetivos específicos}
+\begin{itemize}
+\item Modelar de forma realista las características de los problemas de
+  enrutamiento de las empresas para su representación en forma de parámetros
+  ajustables en los algoritmos metaheurísticos, de manera que su desempeño
+  se vea reflejado en situaciones reales.
+\item Caracterizar el desempeño de distintas metodologías basadas en
+  metaheurísticas para la optimización de procesos, en particular, la solución
+  del llamado Problema del enrutamiento de vehículos (\textit{Vehicle Routing
+  Problem}, o VRP) y sus variaciones.
+\item Diseñar e implementar un prototipo de producto de software con la
+  capacidad de generar soluciones de enrutamiento para pequeñas y medianas
+  empresas.
+\item Evaluar y validar el prototipo resultante y sus especificaciones.
+\end{itemize}
+
+\printbibliography[title={Bibliografía}]
+
+\end{document}
+
+% Local Variables:
+% ispell-local-dictionary: "castellano"
+% End:

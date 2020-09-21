@@ -1,0 +1,31 @@
+* evaluación de metaheurísticas en las pymes (título)
+
+** DONE cobertura 
+   CLOSED: [2020-07-22 Wed 18:18]
+- hablar en positivos (se hará esto, que no es esto)
+
+** TODO Antecedentes 
+- explicar citas
+- mostrar ejemplos de aplicaciones
+- marco teórico, cómo los papers solucionan
+             
+** TODO Breve descripción del problema 
+- explicar situación actual en las empresas, costos operativos de transporte
+  
+** DONE Justificación 
+   CLOSED: [2020-07-22 Wed 18:18]
+- :)
+
+** DONE Objetivo general
+   CLOSED: [2020-07-22 Wed 18:46]
+Diseñar y evaluar un producto para la optimización de un producto software, para
+la optimización de rutas de transporte, empleando metaheurísticas, ...
+
+diseñar e implementar una herramienta de software que permita, a traves de
+metaheurísticas, optimizar rutas de transporte para pymes.
+
+** DONE objetvios específicos
+   CLOSED: [2020-07-22 Wed 22:10]
+  - [X] "caracterizar" en vez de evaluar ... hasta "y sus variaciones"
+  - [X] diseñar y desarrollar un prototipo, o dos, diseñar y uno de desarrollar
+  - [X] evaluación y validación del productos.
