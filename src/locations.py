@@ -10,22 +10,22 @@ performance of the algorithms, while the second one focuses on real-world
 cases.
 """
 
-from random import random
-from typing import List, Tuple, Dict
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib
-from bs4 import BeautifulSoup  # type: ignore
-import requests as rq
 import re
 import os
+from random import random
+from typing import List, Tuple, Dict
+
+from bs4 import BeautifulSoup  # type: ignore
 from yaml import load, SafeLoader
+import matplotlib.pyplot as plt
+import matplotlib
+import requests as rq
 
 matplotlib.use("Tkagg")
 
 
 def random_coords(
-    num: int = 10, width: int = 100, length: int = 100
+        num: int = 10, width: int = 100, length: int = 100
 ) -> List[Tuple[float, float]]:
     """ This method generates a list of random coordinate pairs (floats),
     constrained to a rectangular box. All these parameters can be customized.
@@ -37,6 +37,8 @@ def random_coords(
 
 
 def plot_coords(coords: List[Tuple[float, float]]):
+    """ takes a list of (lat, long) values and plots them through
+    pyplot. """
     plt.scatter(list(map(lambda x: x[0], coords)),
                 list(map(lambda x: x[1], coords)))
     plt.show()

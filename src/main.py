@@ -58,8 +58,8 @@ def main():
     # Create and register a distance callback.
     def distance_callback(from_index, to_index):
         """Returns the distnce between two nodes."""
-        from_node = manager.indexToNode(from_index)
-        to_node = manager.indexToNode(to_index)
+        from_node = manager.IndexToNode(from_index)
+        to_node = manager.IndexToNode(to_index)
         return data['distance_matrix'][from_node][to_node]
 
     transit_callback_index = routing.RegisterTransitCallback(distance_callback)

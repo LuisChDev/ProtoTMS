@@ -142,11 +142,13 @@ cython_debug/
 media
 static
 
+### ### ### CUSTOM
+
 # custom for this project
 secrets.yaml
 .nix-gc-roots
 .direnv
-.envrc
+# .envrc
 assets/*
 
 **/.directory
