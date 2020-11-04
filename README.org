@@ -6,28 +6,6 @@ para flotas de camiones.
 fleets. This can be useful for logistics (deliveries, for instance).
 
 ** instalación / install
-*** Usando nix / with nix
-Instala nix primero (más información en [[nixos.org]]). Descarga el canal
-nixos-20.03, luego, ~cd~ al directorio donde clonaste el proyecto, y ~nix-shell~
-te deja en un entorno con todas las bibliotecas requeridas. Finalmente,
-~nixReqs.txt~ contiene las dependencias externas a nix, para instalar en el
-entorno virtual.
-
-First, install nix (more info in [[nixos.org]]). Download the nixos-20.03 channel.
-Then ~cd~ into the directory where the project lives, and ~nix-shell~ will drop
-you into an env with all requirements satisfied. Finally, ~nixReqs.txt~ contains
-the dependencies missing from nix.
-
-#+BEGIN_SRC bash
-curl -L --proto '=https' --tlsv1.2 https://nixos.org/nix/install | sh
-nix-channel --add https://nixos.org/channels/nixos-20.03
-nix-channel --update
-git clone https://github.com/LuisChDev/ProtoTMS
-cd ProtoTMS
-nix-shell
-python -m pip install -r nixReqs.txt
-#+END_SRC
-
 *** Usando pip / using pip
 crea un entorno virtual e instala los requerimientos: / create a virtual env and
 then install the requirements:
@@ -39,6 +17,27 @@ python3 -m venv .venv
 . .venv/bin/activate
 python3 -m pip install -m requirements.txt
 #+END_SRC
+
+*** Entorno de Nix / Nix environment
+En aras de la exhaustividad, incluyo el entorno de desarrollo en Nix.
+Puede ejecutarse de la siguiente forma:
+
+For the sake of completeness, I include the development environment in Nix.
+It can be used in the following manner:
+
+#+BEGIN_SRC bash
+curl -L https://nixos.org/nix/install | sh
+nix-channel --add https://nixos.org/channels/nixos-20.03 nixos
+nix-channel --update
+nix-env -iA nixos.direnv
+echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
+#+END_SRC
+
+Ahora cuentas con el entorno de desarrollo del proyecto completamente aislado y
+accesible a cualquier editor con una extensión de direnv (como Emacs o VSCode).
+
+Now you have access to the project's dev environment completely isolated and 
+accessible to any editor with a direnv extension (like Emacs or VSCode).
 
 ** Clave de API / API key
 Este proyecto hace uso de la API de Google Maps para ciertos cálculos. Para ello
