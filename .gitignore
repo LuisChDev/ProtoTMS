@@ -191,3 +191,9 @@ proposal/*.pdf
 
 ## .org files
 **/*.org
+
+## backups
+~requirements.txt
+missingTypes.txt
+full-reqs.txt
+##

@@ -22,5 +22,5 @@ in pkgs.mkShell {
   ];
 
   # add dynamic libraries required by many dependencies
-  LD_LIBRARY_PATH = "${pkgs.pythonManylinuxPackages.manylinux2014Package}/lib";
+  # LD_LIBRARY_PATH = "${pkgs.pythonManylinuxPackages.manylinux2014Package}/lib";
 }
