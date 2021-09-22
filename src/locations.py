@@ -15,7 +15,7 @@ import os
 from random import random
 from typing import List, Tuple, Dict
 
-from bs4 import BeautifulSoup  # type: ignore
+from bs4 import BeautifulSoup
 from yaml import load, SafeLoader
 import matplotlib.pyplot as plt
 import matplotlib
@@ -50,17 +50,17 @@ def site_data(refresh: bool = False) -> List[Dict[str, str]]:
     """
 
     # only reload the file when needed
-    if refresh or not os.path.isfile('../assets/ubicaciones.html'):
-        with open("../config.yaml") as fil:
+    if refresh or not os.path.isfile('assets/ubicaciones.html'):
+        with open("config.yaml") as fil:
             conf = load(fil, Loader=SafeLoader)
-        with open("../assets/ubicaciones.html", "w+") as fil:
+        with open("assets/ubicaciones.html", "w+") as fil:
             fil.write(str(rq.get(conf["stores_url"]).text))
 
-    with open("../assets/ubicaciones.html") as fil:
-        ara = BeautifulSoup(fil.read(), features="html.parser")
+    with open("assets/ubicaciones.html") as fil:
+        ara_raw = BeautifulSoup(fil.read(), features="html.parser")
 
     # isolate all the store entries
-    ara = ara.find_all(class_=re.compile("views-row"))
+    ara = ara_raw.find_all(class_=re.compile("views-row"))
 
     # convert each entry into a dict containing the relevant info
     # remove all the whitespace

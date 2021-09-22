@@ -3,7 +3,7 @@ from typing import Dict, List, Tuple, Union
 from math import sqrt
 import googlemaps  # type: ignore
 
-with open('../secrets.yaml', 'r') as f:
+with open('secrets.yaml', 'r') as f:
     keys: Dict = safe_load(f)
 
 # create the google maps API object
