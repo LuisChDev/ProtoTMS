@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# pickled files
+*.p
+
 # C extensions
 *.so
 
@@ -180,6 +183,7 @@ assets/*
 
 ## compiled pdf result
 proposal/*.pdf
+proposal/.pdf-view-restore
 
 ## Build tool auxiliary files:
 *.fdb_latexmk

@@ -1,6 +1,6 @@
 let
   pkgs = import (fetchTarball
-    "https://github.com/NixOS/nixpkgs/archive/20.03.tar.gz") {};
+    "https://github.com/NixOS/nixpkgs/archive/21.05.tar.gz") {};
   pyPkgs = pkgs.python3Packages;
 
 in pkgs.mkShell {
@@ -10,7 +10,14 @@ in pkgs.mkShell {
     python
     tkinter
 
+    # broken in local install
+    matplotlib
+    pandas
+    ortools
+    pulp
+
     # development deps
+    pkgs.jupyter
     pkgs.mypy
     black
     python-language-server
