@@ -8,6 +8,7 @@ in pkgs.mkShell {
   buildInputs = with pyPkgs; [
     # core
     python
+    poetry
     tkinter
 
     # broken in local install
