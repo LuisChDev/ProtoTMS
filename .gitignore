@@ -153,6 +153,7 @@ secrets.yaml
 .direnv
 # .envrc
 assets/*
+!assets/ubicaciones.html
 
 **/.directory
 
