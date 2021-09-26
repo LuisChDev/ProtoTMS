@@ -44,19 +44,21 @@ def plot_coords(coords: List[Tuple[float, float]]):
     plt.show()
 
 
-def site_data(refresh: bool = False) -> List[Dict[str, str]]:
+def site_data(
+        refresh: bool = False,
+        directory: str = "assets/ubicaciones.html"
+     ) -> List[Dict[str, str]]:
     """ This method scraps the locations off a website
-    and returns the data about the sites.
-    """
+    and returns the data about the sites. """
 
     # only reload the file when needed
-    if refresh or not os.path.isfile('assets/ubicaciones.html'):
+    if refresh or not os.path.isfile(directory):
         with open("config.yaml") as fil:
             conf = load(fil, Loader=SafeLoader)
-        with open("assets/ubicaciones.html", "w+") as fil:
+        with open(directory, "w+") as fil:
             fil.write(str(rq.get(conf["stores_url"]).text))
 
-    with open("assets/ubicaciones.html") as fil:
+    with open(directory) as fil:
         ara_raw = BeautifulSoup(fil.read(), features="html.parser")
 
     # isolate all the store entries
