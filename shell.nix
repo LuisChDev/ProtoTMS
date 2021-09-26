@@ -27,6 +27,10 @@ in pkgs.mkShell {
     future
     importmagic
     epc
+
+    # testing
+    pytest
+    requests-mock
   ];
 
   # add dynamic libraries required by many dependencies
