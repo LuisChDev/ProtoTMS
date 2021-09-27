@@ -30,6 +30,7 @@ in pkgs.mkShell {
 
     # testing
     pytest
+    pytest-mock
     requests-mock
   ];
 
