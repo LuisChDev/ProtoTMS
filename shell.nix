@@ -1,7 +1,7 @@
-let
-  pkgs = import (fetchTarball
-    "https://github.com/NixOS/nixpkgs/archive/21.05.tar.gz") {};
-  pyPkgs = pkgs.python3Packages;
+{ pkgs ?
+  import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/21.05.tar.gz")
+  { } }:
+let pyPkgs = pkgs.python3Packages;
 
 in pkgs.mkShell {
   name = "OrToolsEnv";
