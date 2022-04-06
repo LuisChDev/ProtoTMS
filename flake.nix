@@ -2,7 +2,7 @@
   description = "metaheuristic analysis with Google's or-tools software";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -13,7 +13,7 @@
       packageName = "or-tools-tms";
 
     in {
-      devShell = (import ./. { inherit pkgs; });
+      devShell = (import ./shell.nix { inherit pkgs; });
     }
   );
 }

@@ -1,5 +1,5 @@
 { pkgs ?
-  import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/21.05.tar.gz")
+  import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/21.11.tar.gz")
   { } }:
 let pyPkgs = pkgs.python3Packages;
 
@@ -21,7 +21,7 @@ in pkgs.mkShell {
     pkgs.jupyter
     pkgs.mypy
     black
-    python-language-server
+    python-lsp-server
     pyls-black
     pyls-mypy
     future

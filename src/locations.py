@@ -13,13 +13,16 @@ cases.
 import re
 import os
 from random import random
-from typing import List, Tuple, Dict
+from typing import List, Tuple, Dict, Union, Literal
 
 from bs4 import BeautifulSoup
 from yaml import load, SafeLoader
 import matplotlib.pyplot as plt
 import matplotlib
 import requests as rq
+
+import pandas as pd
+import numpy as np
 
 matplotlib.use("Tkagg")
 
@@ -90,15 +93,26 @@ def site_data(
     return entries
 
 
-def site_coords(data: List[Dict[str, str]]) -> List[Tuple[float, float]]:
+Coords = Union[pd.DataFrame, List[Tuple[float, float]]]
+
+
+def site_coords(
+        data: List[Dict[str, str]],
+        retFormat: Union[Literal["frame"], Literal["list"]] = "list"
+) -> Coords:
     """ returns the locations from the list of attributes.
     """
-    # return [*map(lambda x: (x["field-coordenadas"].split(",")[0],
-    #                         x["field-coordenadas"].split(",")[1]), data)]
+
     coords: List[Tuple[float, float]] = []
     for x in data:
         [lat, lon] = x["field-cordenadas"].split(",")
         coords.append((float(lat), float(lon)))
+        if retFormat == "frame":
+            return pd.DataFrame({
+                "latitude": [*map(lambda x: x[0], coords)],
+                "longitude": [*map(lambda x: x[1], coords)],
+                "demand": np.random.randint(10, 20, len(coords))
+            })
     return coords
 
 
