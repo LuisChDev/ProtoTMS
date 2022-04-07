@@ -15,15 +15,13 @@ in pkgs.mkShell {
     matplotlib
     pandas
     ortools
-    pulp
 
     # development deps
     pkgs.jupyter
     pkgs.mypy
     black
     python-lsp-server
-    pyls-black
-    pyls-mypy
+    pylsp-mypy
     future
     importmagic
     epc

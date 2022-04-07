@@ -9,7 +9,6 @@
   outputs = { self, nixpkgs, flake-utils }: flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
-      pyPkgs = pkgs.python3Packages;
       packageName = "or-tools-tms";
 
     in {
